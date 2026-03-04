@@ -1,73 +1,127 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>S. S. OPTICALS</title>
 
 <style>
 
 body{
-font-family:Arial;
 margin:0;
-background:#f2f2f2;
+font-family:Arial;
+background:#f4f4f4;
 }
 
-header{
-background:#111;
-color:white;
-padding:15px;
-text-align:center;
-font-size:28px;
-}
+/* NAVBAR */
 
 nav{
+background:#111;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+}
+
+nav h1{
+margin:0;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+nav li{
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+height:400px;
+background:linear-gradient(120deg,#9c27b0,#2196f3);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+}
+
+.hero h2{
+font-size:40px;
+margin:0;
+}
+
+.hero button{
+padding:12px 25px;
+border:none;
+background:black;
+color:white;
+margin-top:15px;
+cursor:pointer;
+}
+
+/* ABOUT */
+
+.about{
+padding:60px;
 display:flex;
 justify-content:center;
-background:#333;
+gap:60px;
+background:white;
 }
 
-nav button{
-padding:12px 20px;
-border:none;
-background:none;
-color:white;
-cursor:pointer;
-font-size:16px;
+.about img{
+width:250px;
 }
 
-nav button:hover{
-background:#555;
+.about div{
+max-width:400px;
 }
 
-.container{
-padding:20px;
+/* PRODUCTS */
+
+.products{
+padding:60px;
+background:linear-gradient(#dfe6ff,#cfd6ff);
+}
+
+.products h2{
+text-align:center;
+margin-bottom:30px;
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:20px;
+gap:25px;
 }
 
 .card{
 background:white;
+padding:15px;
 border-radius:10px;
-padding:10px;
-box-shadow:0 0 5px rgba(0,0,0,0.2);
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 cursor:pointer;
 }
 
 .card img{
 width:100%;
-height:150px;
-object-fit:cover;
-border-radius:8px;
+height:120px;
+object-fit:contain;
 }
 
 .price{
-color:green;
+color:#e91e63;
 font-weight:bold;
 }
+
+/* MODAL */
 
 .modal{
 position:fixed;
@@ -77,65 +131,112 @@ width:100%;
 height:100%;
 background:rgba(0,0,0,0.6);
 display:none;
-align-items:center;
 justify-content:center;
+align-items:center;
 }
 
-.modal-content{
+.modal-box{
 background:white;
 padding:20px;
 border-radius:10px;
 width:300px;
+text-align:center;
 }
+
+/* ADMIN */
 
 .admin{
-margin-top:30px;
+padding:40px;
 background:white;
-padding:20px;
-border-radius:10px;
 }
 
-input,select{
+.admin input,.admin select{
 width:100%;
-padding:8px;
-margin-top:8px;
+padding:10px;
+margin-top:10px;
 }
 
-button.save{
-margin-top:10px;
+.admin button{
 padding:10px;
-background:#111;
+margin-top:10px;
+background:black;
 color:white;
 border:none;
 cursor:pointer;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>S. S. OPTICALS</header>
+<!-- NAVBAR -->
 
 <nav>
-<button onclick="showCategory('frames')">Optical Frames</button>
-<button onclick="showCategory('goggles')">Goggles</button>
+
+<h1>S. S. OPTICALS</h1>
+
+<ul>
+<li onclick="scrollToSection('home')">Home</li>
+<li onclick="scrollToSection('about')">About</li>
+<li onclick="scrollToSection('shop')">Shop</li>
+</ul>
+
 </nav>
 
-<div class="container">
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<h2>WELCOME TO</h2>
+<h1>S. S. OPTICALS</h1>
+
+<button onclick="scrollToSection('shop')">Shop Now</button>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div>
+
+<h2>About Our Shop</h2>
+
+<p>
+S. S. OPTICALS provides stylish optical frames and premium goggles.
+We offer affordable eyewear with modern designs.
+</p>
+
+</div>
+
+<img src="https://cdn-icons-png.flaticon.com/512/2976/2976215.png">
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="products" id="shop">
+
+<h2>Our Glasses</h2>
 
 <div class="grid" id="items"></div>
 
-<div class="admin">
+</section>
 
-<h3>Add / Edit Item</h3>
+<!-- ADMIN -->
+
+<section class="admin">
+
+<h3>Add Product</h3>
 
 <select id="category">
-<option value="frames">Optical Frames</option>
-<option value="goggles">Goggles</option>
+<option value="frame">Optical Frame</option>
+<option value="goggle">Goggle</option>
 </select>
 
-<input id="name" placeholder="Item Name">
+<input id="name" placeholder="Product name">
 
 <input id="price" placeholder="Price">
 
@@ -143,29 +244,21 @@ cursor:pointer;
 
 <input id="desc" placeholder="Description">
 
-<button class="save" onclick="saveItem()">Save Item</button>
+<button onclick="saveItem()">Save Product</button>
 
-</div>
+</section>
 
-</div>
+<!-- MODAL -->
 
-<div class="modal" id="preview">
-<div class="modal-content" id="previewContent"></div>
+<div class="modal" id="modal">
+
+<div class="modal-box" id="modalContent"></div>
+
 </div>
 
 <script>
 
-let items=JSON.parse(localStorage.getItem("items"))||[]
-
-let currentCategory="frames"
-
-function showCategory(cat){
-
-currentCategory=cat
-
-render()
-
-}
+let items = JSON.parse(localStorage.getItem("opticalItems")) || []
 
 function render(){
 
@@ -175,8 +268,6 @@ grid.innerHTML=""
 
 items.forEach((item,i)=>{
 
-if(item.category==currentCategory){
-
 grid.innerHTML+=`
 
 <div class="card" onclick="preview(${i})">
@@ -185,13 +276,11 @@ grid.innerHTML+=`
 
 <h3>${item.name}</h3>
 
-<div class="price">₹${item.price}</div>
+<p class="price">₹${item.price}</p>
 
 </div>
 
 `
-
-}
 
 })
 
@@ -201,9 +290,9 @@ function preview(i){
 
 let item=items[i]
 
-let box=document.getElementById("preview")
+let modal=document.getElementById("modal")
 
-let content=document.getElementById("previewContent")
+let content=document.getElementById("modalContent")
 
 content.innerHTML=`
 
@@ -213,21 +302,21 @@ content.innerHTML=`
 
 <p>${item.desc}</p>
 
-<h3>Price : ₹${item.price}</h3>
+<h3>₹${item.price}</h3>
 
 <button onclick="editItem(${i})">Edit</button>
 <button onclick="deleteItem(${i})">Delete</button>
-<button onclick="closePreview()">Close</button>
+<button onclick="closeModal()">Close</button>
 
 `
 
-box.style.display="flex"
+modal.style.display="flex"
 
 }
 
-function closePreview(){
+function closeModal(){
 
-document.getElementById("preview").style.display="none"
+document.getElementById("modal").style.display="none"
 
 }
 
@@ -241,11 +330,11 @@ let desc=document.getElementById("desc").value
 
 items.push({category,name,price,image,desc})
 
-localStorage.setItem("items",JSON.stringify(items))
+localStorage.setItem("opticalItems",JSON.stringify(items))
 
 render()
 
-alert("Item Saved")
+alert("Product Added")
 
 }
 
@@ -253,11 +342,11 @@ function deleteItem(i){
 
 items.splice(i,1)
 
-localStorage.setItem("items",JSON.stringify(items))
-
-closePreview()
+localStorage.setItem("opticalItems",JSON.stringify(items))
 
 render()
+
+closeModal()
 
 }
 
@@ -265,7 +354,6 @@ function editItem(i){
 
 let item=items[i]
 
-document.getElementById("category").value=item.category
 document.getElementById("name").value=item.name
 document.getElementById("price").value=item.price
 document.getElementById("image").value=item.image
@@ -273,7 +361,13 @@ document.getElementById("desc").value=item.desc
 
 deleteItem(i)
 
-closePreview()
+closeModal()
+
+}
+
+function scrollToSection(id){
+
+document.getElementById(id).scrollIntoView({behavior:'smooth'})
 
 }
 
