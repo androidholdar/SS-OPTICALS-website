@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>S. S. OPTICALS</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f2f2f2;
+}
+
+header{
+background:#111;
+color:white;
+padding:15px;
+text-align:center;
+font-size:28px;
+}
+
+nav{
+display:flex;
+justify-content:center;
+background:#333;
+}
+
+nav button{
+padding:12px 20px;
+border:none;
+background:none;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+nav button:hover{
+background:#555;
+}
+
+.container{
+padding:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+padding:10px;
+box-shadow:0 0 5px rgba(0,0,0,0.2);
+cursor:pointer;
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.price{
+color:green;
+font-weight:bold;
+}
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+width:300px;
+}
+
+.admin{
+margin-top:30px;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+input,select{
+width:100%;
+padding:8px;
+margin-top:8px;
+}
+
+button.save{
+margin-top:10px;
+padding:10px;
+background:#111;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>S. S. OPTICALS</header>
+
+<nav>
+<button onclick="showCategory('frames')">Optical Frames</button>
+<button onclick="showCategory('goggles')">Goggles</button>
+</nav>
+
+<div class="container">
+
+<div class="grid" id="items"></div>
+
+<div class="admin">
+
+<h3>Add / Edit Item</h3>
+
+<select id="category">
+<option value="frames">Optical Frames</option>
+<option value="goggles">Goggles</option>
+</select>
+
+<input id="name" placeholder="Item Name">
+
+<input id="price" placeholder="Price">
+
+<input id="image" placeholder="Image URL">
+
+<input id="desc" placeholder="Description">
+
+<button class="save" onclick="saveItem()">Save Item</button>
+
+</div>
+
+</div>
+
+<div class="modal" id="preview">
+<div class="modal-content" id="previewContent"></div>
+</div>
+
+<script>
+
+let items=JSON.parse(localStorage.getItem("items"))||[]
+
+let currentCategory="frames"
+
+function showCategory(cat){
+
+currentCategory=cat
+
+render()
+
+}
+
+function render(){
+
+let grid=document.getElementById("items")
+
+grid.innerHTML=""
+
+items.forEach((item,i)=>{
+
+if(item.category==currentCategory){
+
+grid.innerHTML+=`
+
+<div class="card" onclick="preview(${i})">
+
+<img src="${item.image}">
+
+<h3>${item.name}</h3>
+
+<div class="price">₹${item.price}</div>
+
+</div>
+
+`
+
+}
+
+})
+
+}
+
+function preview(i){
+
+let item=items[i]
+
+let box=document.getElementById("preview")
+
+let content=document.getElementById("previewContent")
+
+content.innerHTML=`
+
+<img src="${item.image}" style="width:100%">
+
+<h2>${item.name}</h2>
+
+<p>${item.desc}</p>
+
+<h3>Price : ₹${item.price}</h3>
+
+<button onclick="editItem(${i})">Edit</button>
+<button onclick="deleteItem(${i})">Delete</button>
+<button onclick="closePreview()">Close</button>
+
+`
+
+box.style.display="flex"
+
+}
+
+function closePreview(){
+
+document.getElementById("preview").style.display="none"
+
+}
+
+function saveItem(){
+
+let category=document.getElementById("category").value
+let name=document.getElementById("name").value
+let price=document.getElementById("price").value
+let image=document.getElementById("image").value
+let desc=document.getElementById("desc").value
+
+items.push({category,name,price,image,desc})
+
+localStorage.setItem("items",JSON.stringify(items))
+
+render()
+
+alert("Item Saved")
+
+}
+
+function deleteItem(i){
+
+items.splice(i,1)
+
+localStorage.setItem("items",JSON.stringify(items))
+
+closePreview()
+
+render()
+
+}
+
+function editItem(i){
+
+let item=items[i]
+
+document.getElementById("category").value=item.category
+document.getElementById("name").value=item.name
+document.getElementById("price").value=item.price
+document.getElementById("image").value=item.image
+document.getElementById("desc").value=item.desc
+
+deleteItem(i)
+
+closePreview()
+
+}
+
+render()
+
+</script>
+
+</body>
+</html>
