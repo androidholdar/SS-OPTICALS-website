@@ -28,8 +28,7 @@ body{
 }
 
 /* ========== VIEWS ========== */
-#user-view, #admin-view{ display:none; }
-#login-view{ display:flex; }
+#user-view, #admin-view, #login-view{ display:none; }
 
 /* ========== LOGIN PAGE ========== */
 #login-view{
@@ -831,6 +830,22 @@ footer span{ color:rgba(255,255,255,0.6); }
 </head>
 <body>
 
+<!-- ===== HIDDEN ADMIN LOGIN OVERLAY ===== -->
+<div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
+  <div class="login-box" style="position:relative;">
+    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,0.3);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div class="login-logo">S. S. OPTICALS</div>
+    <div class="login-sub">Admin Access</div>
+    <input class="login-input" type="text" id="ov-user" placeholder="Username">
+    <div class="pw-wrap">
+      <input class="login-input" type="password" id="ov-pass" placeholder="Password" style="padding-right:45px" onkeydown="if(event.key==='Enter')doOverlayLogin()">
+      <span class="pw-toggle" onclick="toggleOvPw()">👁</span>
+    </div>
+    <button class="login-btn" onclick="doOverlayLogin()">Enter Admin Panel</button>
+    <div class="login-err" id="ov-err">Galat username ya password!</div>
+  </div>
+</div>
+
 <!-- ===== LOGIN VIEW ===== -->
 <div id="login-view">
   <div class="login-box">
@@ -1024,16 +1039,12 @@ function goUser(){
 }
 
 function showLogin(){
-  document.getElementById('admin-user').value='';
-  document.getElementById('admin-pass').value='';
-  document.getElementById('login-err').style.display='none';
-  setTab('admin');
-  show('login-view');
+  openAdminOverlay();
 }
 
 function doLogout(){
-  show('login-view');
-  setTab('admin');
+  show('user-view');
+  renderUser();
 }
 
 function show(view){
@@ -1195,8 +1206,53 @@ function showToast(msg){
   toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
+// ========== HIDDEN ADMIN OVERLAY ==========
+function openAdminOverlay(){
+  document.getElementById('ov-user').value='';
+  document.getElementById('ov-pass').value='';
+  document.getElementById('ov-err').style.display='none';
+  let ov = document.getElementById('admin-overlay');
+  ov.style.display='flex';
+  setTimeout(()=>document.getElementById('ov-user').focus(),100);
+}
+
+function closeAdminOverlay(){
+  document.getElementById('admin-overlay').style.display='none';
+}
+
+function toggleOvPw(){
+  let p = document.getElementById('ov-pass');
+  p.type = p.type==='password' ? 'text' : 'password';
+}
+
+function doOverlayLogin(){
+  let u = document.getElementById('ov-user').value.trim();
+  let p = document.getElementById('ov-pass').value;
+  let err = document.getElementById('ov-err');
+  if(u===ADMIN_USER && p===ADMIN_PASS){
+    err.style.display='none';
+    closeAdminOverlay();
+    show('admin-view');
+    renderAdmin();
+  } else {
+    err.style.display='block';
+    document.getElementById('ov-pass').value='';
+  }
+}
+
+// Ctrl+Shift+A = secret admin shortcut
+document.addEventListener('keydown', function(e){
+  if(e.ctrlKey && e.shiftKey && e.key==='A'){
+    e.preventDefault();
+    let adminVisible = document.getElementById('admin-view').style.display!=='none';
+    if(!adminVisible) openAdminOverlay();
+  }
+});
+
 // ========== INIT ==========
-setTab('admin');
+// Website seedha user/shop view pe khulti hai
+show('user-view');
+renderUser();
 </script>
 </body>
 </html>
