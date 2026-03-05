@@ -27,38 +27,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ========== VIEWS ========== */
 #user-view, #admin-view, #login-view{ display:none; }
-
-/* ========== LOGIN PAGE ========== */
-#login-view{
-  min-height:100vh;
-  background:var(--black);
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:0;
-  position:relative;
-  overflow:hidden;
-}
-
-#login-view::before{
-  content:'';
-  position:absolute;
-  width:600px;height:600px;
-  background:radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
-  top:-200px;right:-200px;
-  pointer-events:none;
-}
-
-#login-view::after{
-  content:'';
-  position:absolute;
-  width:400px;height:400px;
-  background:radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%);
-  bottom:-100px;left:-100px;
-  pointer-events:none;
-}
 
 .login-box{
   background:rgba(255,255,255,0.04);
@@ -76,7 +45,7 @@ body{
 .login-logo{
   font-family:'Playfair Display',serif;
   font-size:28px;
-  color:var(--white);
+  color:#fafafa;
   letter-spacing:2px;
   margin-bottom:6px;
 }
@@ -87,34 +56,6 @@ body{
   letter-spacing:3px;
   text-transform:uppercase;
   margin-bottom:35px;
-}
-
-.login-tabs{
-  display:flex;
-  background:rgba(255,255,255,0.05);
-  border-radius:10px;
-  padding:4px;
-  margin-bottom:30px;
-  gap:4px;
-}
-
-.tab-btn{
-  flex:1;
-  padding:10px;
-  border:none;
-  background:transparent;
-  color:rgba(255,255,255,0.4);
-  border-radius:8px;
-  cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;
-  font-weight:500;
-  transition:all 0.2s;
-}
-
-.tab-btn.active{
-  background:var(--purple);
-  color:white;
 }
 
 .login-input{
@@ -132,12 +73,12 @@ body{
 }
 
 .login-input::placeholder{ color:rgba(255,255,255,0.25); }
-.login-input:focus{ border-color:var(--purple); }
+.login-input:focus{ border-color:#7c3aed; }
 
 .login-btn{
   width:100%;
   padding:14px;
-  background:linear-gradient(135deg,var(--purple),var(--blue));
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
   border:none;
   border-radius:10px;
   color:white;
@@ -150,7 +91,6 @@ body{
 }
 
 .login-btn:hover{ opacity:0.9; transform:translateY(-1px); }
-.login-btn:active{ transform:translateY(0); }
 
 .login-err{
   color:#f87171;
@@ -159,20 +99,17 @@ body{
   display:none;
 }
 
-.continue-user{
-  color:rgba(255,255,255,0.3);
-  font-size:13px;
-  margin-top:20px;
-  cursor:pointer;
-  text-decoration:underline;
-  transition:color 0.2s;
+.pw-wrap{ position:relative; }
+.pw-toggle{
+  position:absolute;
+  right:14px;top:50%;transform:translateY(-50%);
+  cursor:pointer;color:rgba(255,255,255,0.3);
+  font-size:14px;user-select:none;
 }
+.pw-toggle:hover{ color:rgba(255,255,255,0.6); }
 
-.continue-user:hover{ color:rgba(255,255,255,0.7); }
-
-/* ========== NAVBAR ========== */
 nav{
-  background:var(--black);
+  background:#0a0a0a;
   color:white;
   display:flex;
   justify-content:space-between;
@@ -204,20 +141,6 @@ nav li{
 }
 nav li:hover{ color:white; }
 
-.admin-badge{
-  background:var(--purple);
-  color:white;
-  padding:5px 14px;
-  border-radius:20px;
-  font-size:12px;
-  cursor:pointer;
-  font-weight:500;
-  transition:background 0.2s;
-}
-
-.admin-badge:hover{ background:#6d28d9; }
-
-/* ========== HERO ========== */
 .hero{
   min-height:480px;
   background:linear-gradient(135deg,#0a0a0a 0%,#1a0533 50%,#0c1a40 100%);
@@ -272,7 +195,7 @@ nav li:hover{ color:white; }
   margin-top:30px;
   padding:14px 35px;
   background:white;
-  color:var(--black);
+  color:#0a0a0a;
   border:none;
   border-radius:40px;
   font-family:'DM Sans',sans-serif;
@@ -284,20 +207,15 @@ nav li:hover{ color:white; }
   transition:all 0.2s;
 }
 
-.hero-btn:hover{
-  background:var(--purple);
-  color:white;
-  transform:translateY(-2px);
-}
+.hero-btn:hover{ background:#7c3aed; color:white; transform:translateY(-2px); }
 
-/* ========== ABOUT ========== */
 .about{
   padding:80px 50px;
   display:flex;
   justify-content:center;
   align-items:center;
   gap:70px;
-  background:var(--white);
+  background:#fafafa;
   flex-wrap:wrap;
 }
 
@@ -305,11 +223,11 @@ nav li:hover{ color:white; }
   font-family:'Playfair Display',serif;
   font-size:36px;
   margin-bottom:15px;
-  color:var(--black);
+  color:#0a0a0a;
 }
 
 .about-text p{
-  color:var(--muted);
+  color:#64748b;
   line-height:1.8;
   max-width:400px;
   font-size:15px;
@@ -323,7 +241,7 @@ nav li:hover{ color:white; }
 
 .about-tag{
   display:inline-block;
-  background:linear-gradient(135deg,var(--purple),var(--blue));
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
   color:white;
   padding:4px 14px;
   border-radius:20px;
@@ -333,10 +251,9 @@ nav li:hover{ color:white; }
   margin-bottom:12px;
 }
 
-/* ========== PRODUCTS ========== */
 .products{
   padding:70px 50px;
-  background:var(--gray);
+  background:#f1f5f9;
 }
 
 .products-header{
@@ -347,11 +264,11 @@ nav li:hover{ color:white; }
 .products-header h2{
   font-family:'Playfair Display',serif;
   font-size:38px;
-  color:var(--black);
+  color:#0a0a0a;
 }
 
 .products-header p{
-  color:var(--muted);
+  color:#64748b;
   margin-top:8px;
   font-size:14px;
 }
@@ -375,49 +292,16 @@ nav li:hover{ color:white; }
   border:1px solid rgba(0,0,0,0.04);
 }
 
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 15px 35px rgba(124,58,237,0.15);
-}
+.card:hover{ transform:translateY(-6px); box-shadow:0 15px 35px rgba(124,58,237,0.15); }
 
-.card img{
-  width:100%;
-  height:130px;
-  object-fit:contain;
-  margin-bottom:12px;
-}
+.card img{ width:100%; height:130px; object-fit:contain; margin-bottom:12px; }
+.card h3{ font-size:14px; font-weight:500; margin-bottom:6px; color:#1e293b; }
+.card-cat{ font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+.price{ color:#ec4899; font-weight:700; font-size:17px; }
 
-.card h3{
-  font-size:14px;
-  font-weight:500;
-  margin-bottom:6px;
-  color:var(--text);
-}
-
-.card-cat{
-  font-size:11px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:8px;
-}
-
-.price{
-  color:var(--pink);
-  font-weight:700;
-  font-size:17px;
-}
-
-.empty-state{
-  text-align:center;
-  padding:60px;
-  color:var(--muted);
-  grid-column:1/-1;
-}
-
+.empty-state{ text-align:center; padding:60px; color:#64748b; grid-column:1/-1; }
 .empty-state .empty-icon{ font-size:50px; margin-bottom:15px; }
 
-/* ========== MODAL ========== */
 .modal{
   position:fixed;
   inset:0;
@@ -441,102 +325,49 @@ nav li:hover{ color:white; }
   animation:fadeUp 0.3s ease;
 }
 
-.modal-img{
-  width:100%;
-  height:220px;
-  object-fit:contain;
-  background:var(--gray);
-  padding:20px;
-}
-
+.modal-img{ width:100%; height:220px; object-fit:contain; background:#f1f5f9; padding:20px; }
 .modal-body{ padding:22px; }
-
-.modal-cat{
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--purple);
-  margin-bottom:5px;
-}
-
-.modal-body h2{
-  font-family:'Playfair Display',serif;
-  font-size:22px;
-  margin-bottom:8px;
-}
-
-.modal-body p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:15px;
-}
-
-.modal-price{
-  font-size:24px;
-  font-weight:700;
-  color:var(--pink);
-  margin-bottom:18px;
-}
-
+.modal-cat{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#7c3aed; margin-bottom:5px; }
+.modal-body h2{ font-family:'Playfair Display',serif; font-size:22px; margin-bottom:8px; }
+.modal-body p{ color:#64748b; font-size:14px; line-height:1.6; margin-bottom:15px; }
+.modal-price{ font-size:24px; font-weight:700; color:#ec4899; margin-bottom:18px; }
 .modal-actions{ display:flex; gap:10px; }
 
 .btn-close{
-  flex:1;
-  padding:11px;
-  border:1.5px solid #e2e8f0;
-  background:white;
-  border-radius:10px;
-  cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;
-  color:var(--muted);
+  flex:1; padding:11px;
+  border:1.5px solid #e2e8f0; background:white;
+  border-radius:10px; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:13px; color:#64748b;
   transition:all 0.2s;
 }
-
 .btn-close:hover{ border-color:#cbd5e1; background:#f8fafc; }
 
-/* ========== FOOTER ========== */
 footer{
-  background:var(--black);
+  background:#0a0a0a;
   color:rgba(255,255,255,0.35);
   text-align:center;
   padding:30px;
   font-size:13px;
 }
-
 footer span{ color:rgba(255,255,255,0.6); }
 
-/* ========== ADMIN VIEW ========== */
-#admin-view{
-  min-height:100vh;
-  background:#f8fafc;
-}
+#admin-view{ min-height:100vh; background:#f8fafc; }
 
 .admin-nav{
-  background:var(--black);
+  background:#0a0a0a;
   padding:18px 40px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-.admin-nav-logo{
-  font-family:'Playfair Display',serif;
-  color:white;
-  font-size:18px;
-  letter-spacing:2px;
-}
+.admin-nav-logo{ font-family:'Playfair Display',serif; color:white; font-size:18px; letter-spacing:2px; }
 
-.admin-nav-right{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
+.admin-nav-right{ display:flex; align-items:center; gap:15px; }
 
 .admin-label{
   background:rgba(124,58,237,0.3);
-  color:var(--purple);
+  color:#7c3aed;
   padding:4px 12px;
   border-radius:20px;
   font-size:12px;
@@ -555,7 +386,6 @@ footer span{ color:rgba(255,255,255,0.6); }
   font-size:13px;
   transition:all 0.2s;
 }
-
 .logout-btn:hover{ border-color:rgba(255,255,255,0.4); color:white; }
 
 .admin-body{
@@ -564,18 +394,18 @@ footer span{ color:rgba(255,255,255,0.6); }
   min-height:calc(100vh - 60px);
 }
 
-/* Admin Sidebar */
 .admin-sidebar{
   background:white;
   padding:30px 25px;
   border-right:1px solid #e2e8f0;
+  overflow-y:auto;
 }
 
 .sidebar-title{
   font-size:11px;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:var(--muted);
+  color:#64748b;
   margin-bottom:20px;
   font-weight:500;
 }
@@ -585,7 +415,7 @@ footer span{ color:rgba(255,255,255,0.6); }
 .form-label{
   display:block;
   font-size:12px;
-  color:var(--muted);
+  color:#64748b;
   margin-bottom:6px;
   font-weight:500;
   text-transform:uppercase;
@@ -599,18 +429,17 @@ footer span{ color:rgba(255,255,255,0.6); }
   border-radius:10px;
   font-family:'DM Sans',sans-serif;
   font-size:14px;
-  color:var(--text);
+  color:#1e293b;
   outline:none;
   transition:border 0.2s;
   background:white;
 }
-
-.form-input:focus, .form-select:focus{ border-color:var(--purple); }
+.form-input:focus, .form-select:focus{ border-color:#7c3aed; }
 
 .save-btn{
   width:100%;
   padding:13px;
-  background:linear-gradient(135deg,var(--purple),var(--blue));
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
   color:white;
   border:none;
   border-radius:10px;
@@ -621,12 +450,8 @@ footer span{ color:rgba(255,255,255,0.6); }
   margin-top:5px;
   transition:opacity 0.2s, transform 0.1s;
 }
-
 .save-btn:hover{ opacity:0.9; transform:translateY(-1px); }
-
-.save-btn.editing{
-  background:linear-gradient(135deg,#f59e0b,#ef4444);
-}
+.save-btn.editing{ background:linear-gradient(135deg,#f59e0b,#ef4444); }
 
 .cancel-edit-btn{
   width:100%;
@@ -636,15 +461,13 @@ footer span{ color:rgba(255,255,255,0.6); }
   border-radius:10px;
   font-family:'DM Sans',sans-serif;
   font-size:13px;
-  color:var(--muted);
+  color:#64748b;
   cursor:pointer;
   margin-top:8px;
   display:none;
 }
-
 .cancel-edit-btn.visible{ display:block; }
 
-/* Admin Product List */
 .admin-content{ padding:30px; }
 
 .content-header{
@@ -654,18 +477,14 @@ footer span{ color:rgba(255,255,255,0.6); }
   margin-bottom:25px;
 }
 
-.content-title{
-  font-family:'Playfair Display',serif;
-  font-size:26px;
-  color:var(--black);
-}
+.content-title{ font-family:'Playfair Display',serif; font-size:26px; color:#0a0a0a; }
 
 .product-count{
-  background:var(--gray);
+  background:#f1f5f9;
   padding:5px 14px;
   border-radius:20px;
   font-size:13px;
-  color:var(--muted);
+  color:#64748b;
 }
 
 .admin-grid{
@@ -681,83 +500,33 @@ footer span{ color:rgba(255,255,255,0.6); }
   border:1.5px solid #e2e8f0;
   transition:border-color 0.2s, box-shadow 0.2s;
 }
-
-.admin-card:hover{
-  border-color:var(--purple);
-  box-shadow:0 5px 20px rgba(124,58,237,0.1);
-}
-
-.admin-card img{
-  width:100%;
-  height:120px;
-  object-fit:contain;
-  background:#f8fafc;
-  padding:15px;
-}
-
+.admin-card:hover{ border-color:#7c3aed; box-shadow:0 5px 20px rgba(124,58,237,0.1); }
+.admin-card img{ width:100%; height:120px; object-fit:contain; background:#f8fafc; padding:15px; }
 .admin-card-body{ padding:14px; }
-
-.admin-card-cat{
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--purple);
-  margin-bottom:4px;
-}
-
-.admin-card h3{
-  font-size:13px;
-  font-weight:500;
-  margin-bottom:6px;
-}
-
-.admin-card-price{
-  color:var(--pink);
-  font-weight:700;
-  font-size:15px;
-  margin-bottom:12px;
-}
-
+.admin-card-cat{ font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#7c3aed; margin-bottom:4px; }
+.admin-card h3{ font-size:13px; font-weight:500; margin-bottom:6px; }
+.admin-card-price{ color:#ec4899; font-weight:700; font-size:15px; margin-bottom:12px; }
 .admin-card-btns{ display:flex; gap:8px; }
 
 .edit-btn, .del-btn{
-  flex:1;
-  padding:8px;
-  border-radius:8px;
-  border:none;
-  cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-  font-size:12px;
-  font-weight:500;
+  flex:1; padding:8px; border-radius:8px; border:none;
+  cursor:pointer; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500;
   transition:all 0.2s;
 }
-
-.edit-btn{
-  background:#ede9fe;
-  color:var(--purple);
-}
-
+.edit-btn{ background:#ede9fe; color:#7c3aed; }
 .edit-btn:hover{ background:#ddd6fe; }
-
-.del-btn{
-  background:#fee2e2;
-  color:#ef4444;
-}
-
+.del-btn{ background:#fee2e2; color:#ef4444; }
 .del-btn:hover{ background:#fecaca; }
 
-/* ========== ANIMATIONS ========== */
 @keyframes fadeUp{
   from{ opacity:0; transform:translateY(20px); }
   to{ opacity:1; transform:translateY(0); }
 }
 
-/* ========== TOAST ========== */
 .toast{
   position:fixed;
-  bottom:30px;
-  right:30px;
-  background:var(--black);
+  bottom:30px; right:30px;
+  background:#0a0a0a;
   color:white;
   padding:14px 22px;
   border-radius:12px;
@@ -765,78 +534,40 @@ footer span{ color:rgba(255,255,255,0.6); }
   z-index:9999;
   display:none;
   animation:fadeUp 0.3s ease;
-  border-left:3px solid var(--purple);
+  border-left:3px solid #7c3aed;
 }
-
 .toast.show{ display:block; }
 
-/* Confirm Modal */
 .confirm-modal{
-  position:fixed;
-  inset:0;
+  position:fixed; inset:0;
   background:rgba(0,0,0,0.65);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  backdrop-filter:blur(4px);
+  display:none; justify-content:center; align-items:center;
+  z-index:9999; backdrop-filter:blur(4px);
 }
-
 .confirm-modal.active{ display:flex; }
 
 .confirm-box{
-  background:white;
-  border-radius:16px;
-  padding:30px;
-  width:320px;
-  text-align:center;
-  animation:fadeUp 0.3s ease;
+  background:white; border-radius:16px; padding:30px;
+  width:320px; text-align:center; animation:fadeUp 0.3s ease;
 }
-
-.confirm-box h3{
-  font-family:'Playfair Display',serif;
-  font-size:20px;
-  margin-bottom:10px;
-}
-
-.confirm-box p{ color:var(--muted); font-size:14px; margin-bottom:25px; }
-
+.confirm-box h3{ font-family:'Playfair Display',serif; font-size:20px; margin-bottom:10px; }
+.confirm-box p{ color:#64748b; font-size:14px; margin-bottom:25px; }
 .confirm-btns{ display:flex; gap:10px; }
-
-.confirm-yes{
-  flex:1;padding:11px;background:#ef4444;color:white;border:none;
-  border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;
-  transition:background 0.2s;
-}
+.confirm-yes{ flex:1;padding:11px;background:#ef4444;color:white;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;transition:background 0.2s; }
 .confirm-yes:hover{ background:#dc2626; }
-
-.confirm-no{
-  flex:1;padding:11px;background:#f1f5f9;color:var(--text);border:none;
-  border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;
-  transition:background 0.2s;
-}
+.confirm-no{ flex:1;padding:11px;background:#f1f5f9;color:#1e293b;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;transition:background 0.2s; }
 .confirm-no:hover{ background:#e2e8f0; }
-
-/* Password toggle */
-.pw-wrap{ position:relative; }
-.pw-toggle{
-  position:absolute;
-  right:14px;top:50%;transform:translateY(-50%);
-  cursor:pointer;color:rgba(255,255,255,0.3);
-  font-size:14px;user-select:none;
-}
-.pw-toggle:hover{ color:rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
 
-<!-- ===== HIDDEN ADMIN LOGIN OVERLAY ===== -->
-<div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
-  <div class="login-box" style="position:relative;">
+<!-- HIDDEN ADMIN LOGIN OVERLAY (Ctrl+Shift+A se khulta hai) -->
+<div id="admin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
+  <div class="login-box" style="position:relative;background:rgba(15,15,15,0.95);">
     <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,0.3);font-size:20px;cursor:pointer;line-height:1;">✕</button>
     <div class="login-logo">S. S. OPTICALS</div>
     <div class="login-sub">Admin Access</div>
-    <input class="login-input" type="text" id="ov-user" placeholder="Username">
+    <input class="login-input" type="text" id="ov-user" placeholder="Username" autocomplete="off">
     <div class="pw-wrap">
       <input class="login-input" type="password" id="ov-pass" placeholder="Password" style="padding-right:45px" onkeydown="if(event.key==='Enter')doOverlayLogin()">
       <span class="pw-toggle" onclick="toggleOvPw()">👁</span>
@@ -846,71 +577,41 @@ footer span{ color:rgba(255,255,255,0.6); }
   </div>
 </div>
 
-<!-- ===== LOGIN VIEW ===== -->
-<div id="login-view">
-  <div class="login-box">
-    <div class="login-logo">S. S. OPTICALS</div>
-    <div class="login-sub">Premium Eyewear</div>
-
-    <div class="login-tabs">
-      <button class="tab-btn active" onclick="setTab('user')">Browse Store</button>
-      <button class="tab-btn" onclick="setTab('admin')">Admin Login</button>
-    </div>
-
-    <div id="admin-login-form">
-      <input class="login-input" type="text" id="admin-user" placeholder="Username">
-      <div class="pw-wrap">
-        <input class="login-input" type="password" id="admin-pass" placeholder="Password" style="padding-right:45px" onkeydown="if(event.key==='Enter')doAdminLogin()">
-        <span class="pw-toggle" onclick="togglePw()">👁</span>
-      </div>
-      <button class="login-btn" onclick="doAdminLogin()">Enter Admin Panel</button>
-      <div class="login-err" id="login-err">Galat username ya password!</div>
-    </div>
-
-    <p class="continue-user" onclick="goUser()">← Browse as customer</p>
-  </div>
-</div>
-
-<!-- ===== USER VIEW ===== -->
+<!-- USER VIEW -->
 <div id="user-view">
-  <!-- Navbar -->
   <nav>
     <div class="nav-logo">S. S. OPTICALS</div>
     <ul>
-      <li onclick="scrollTo('home')">Home</li>
-      <li onclick="scrollTo('about')">About</li>
-      <li onclick="scrollTo('shop')">Shop</li>
+      <li onclick="scrollToSec('home')">Home</li>
+      <li onclick="scrollToSec('about')">About</li>
+      <li onclick="scrollToSec('shop')">Shop</li>
     </ul>
   </nav>
 
-  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-eyewear">Premium Eyewear Collection</div>
     <h2>S. S. OPTICALS</h2>
-    <p>Stylish frames & premium goggles at affordable prices</p>
-    <button class="hero-btn" onclick="scrollTo('shop')">Explore Collection</button>
+    <p>Stylish frames &amp; premium goggles at affordable prices</p>
+    <button class="hero-btn" onclick="scrollToSec('shop')">Explore Collection</button>
   </section>
 
-  <!-- About -->
   <section class="about" id="about">
     <img class="about-img" src="https://cdn-icons-png.flaticon.com/512/2976/2976215.png">
     <div class="about-text">
-      <span class="about-tag">Est. since years</span>
+      <span class="about-tag">Premium Eyewear</span>
       <h2>About Our Shop</h2>
       <p>S. S. OPTICALS aapko stylish optical frames aur premium goggles provide karta hai. Hum affordable eyewear modern designs ke saath offer karte hain, taaki aap har moment mein best dikhein.</p>
     </div>
   </section>
 
-  <!-- Products -->
   <section class="products" id="shop">
     <div class="products-header">
       <h2>Our Collection</h2>
-      <p>Premium eyewear — frames & goggles</p>
+      <p>Premium eyewear — frames &amp; goggles</p>
     </div>
     <div class="grid" id="user-grid"></div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <span>S. S. OPTICALS</span> — Premium Eyewear &copy; 2025
   </footer>
@@ -921,7 +622,7 @@ footer span{ color:rgba(255,255,255,0.6); }
   <div class="modal-box" id="modal-content"></div>
 </div>
 
-<!-- ===== ADMIN VIEW ===== -->
+<!-- ADMIN VIEW -->
 <div id="admin-view">
   <div class="admin-nav">
     <div class="admin-nav-logo">S. S. OPTICALS</div>
@@ -932,7 +633,6 @@ footer span{ color:rgba(255,255,255,0.6); }
   </div>
 
   <div class="admin-body">
-    <!-- Sidebar Form -->
     <div class="admin-sidebar">
       <div class="sidebar-title" id="form-title">Add New Product</div>
 
@@ -943,22 +643,18 @@ footer span{ color:rgba(255,255,255,0.6); }
           <option value="goggle">Goggle</option>
         </select>
       </div>
-
       <div class="form-group">
         <label class="form-label">Product Name</label>
         <input class="form-input" id="a-name" placeholder="e.g. Classic Black Frame">
       </div>
-
       <div class="form-group">
         <label class="form-label">Price (₹)</label>
         <input class="form-input" id="a-price" type="number" placeholder="e.g. 899">
       </div>
-
       <div class="form-group">
         <label class="form-label">Image URL</label>
         <input class="form-input" id="a-image" placeholder="https://...">
       </div>
-
       <div class="form-group">
         <label class="form-label">Description</label>
         <input class="form-input" id="a-desc" placeholder="Short description">
@@ -968,11 +664,11 @@ footer span{ color:rgba(255,255,255,0.6); }
       <button class="save-btn" id="save-btn" onclick="saveProduct()">+ Add Product</button>
       <button class="cancel-edit-btn" id="cancel-edit" onclick="cancelEdit()">✕ Cancel Edit</button>
 
-      <!-- Change Credentials -->
+      <!-- Change Credentials Section -->
       <div style="margin-top:30px;padding-top:25px;border-top:1px solid #e2e8f0;">
-        <div class="sidebar-title" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onclick="toggleCredsForm()">
+        <div class="sidebar-title" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:0;" onclick="toggleCredsForm()">
           <span>🔐 Change Login Details</span>
-          <span id="creds-arrow" style="font-size:12px;color:var(--muted);">▼</span>
+          <span id="creds-arrow" style="font-size:11px;color:#64748b;">▼</span>
         </div>
         <div id="creds-form" style="display:none;margin-top:15px;">
           <div class="form-group">
@@ -997,7 +693,6 @@ footer span{ color:rgba(255,255,255,0.6); }
       </div>
     </div>
 
-    <!-- Product Grid -->
     <div class="admin-content">
       <div class="content-header">
         <div class="content-title">All Products</div>
@@ -1008,10 +703,8 @@ footer span{ color:rgba(255,255,255,0.6); }
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Confirm Delete Modal -->
 <div class="confirm-modal" id="confirm-modal">
   <div class="confirm-box">
     <h3>Delete Product?</h3>
@@ -1024,178 +717,110 @@ footer span{ color:rgba(255,255,255,0.6); }
 </div>
 
 <script>
-// ========== STATE ==========
-// Credentials localStorage mein hashed store hote hain, source code mein plain text nahi
-function hashStr(str){
-  let hash = 0;
-  for(let i=0;i<str.length;i++){ hash = ((hash<<5)-hash)+str.charCodeAt(i); hash|=0; }
-  return hash.toString(16);
+// Password hashing — source code mein plain text credentials nahi dikhte
+function hashStr(s){
+  let h=0;
+  for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
+  return h.toString(16);
 }
-
-const DEFAULT_USER_HASH = hashStr("ssopticals");
-const DEFAULT_PASS_HASH = hashStr("admin@123");
-
-function getSavedUser(){ return localStorage.getItem('_adm_u') || DEFAULT_USER_HASH; }
-function getSavedPass(){ return localStorage.getItem('_adm_p') || DEFAULT_PASS_HASH; }
-function checkCreds(u,p){ return hashStr(u)===getSavedUser() && hashStr(p)===getSavedPass(); }
+const DU=hashStr("ssopticals");
+const DP=hashStr("admin@123");
+function getSU(){ return localStorage.getItem('_adm_u')||DU; }
+function getSP(){ return localStorage.getItem('_adm_p')||DP; }
+function checkCreds(u,p){ return hashStr(u)===getSU()&&hashStr(p)===getSP(); }
 function saveCreds(u,p){ localStorage.setItem('_adm_u',hashStr(u)); localStorage.setItem('_adm_p',hashStr(p)); }
 
-let items = JSON.parse(localStorage.getItem("opticalItems")) || [];
-let deleteIndex = -1;
-let currentTab = 'admin';
+let items=JSON.parse(localStorage.getItem("opticalItems"))||[];
+let deleteIndex=-1;
 
-// ========== LOGIN ==========
-function setTab(tab){
-  currentTab = tab;
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.toggle('active', (i===0&&tab==='user')||(i===1&&tab==='admin'));
-  });
-  document.getElementById('admin-login-form').style.display = tab==='admin' ? 'block' : 'none';
-}
-
-function togglePw(){
-  let p = document.getElementById('admin-pass');
-  p.type = p.type === 'password' ? 'text' : 'password';
-}
-
-function doAdminLogin(){
-  let u = document.getElementById('admin-user').value.trim();
-  let p = document.getElementById('admin-pass').value;
-  let err = document.getElementById('login-err');
-  if(checkCreds(u,p)){
-    err.style.display='none';
-    show('admin-view');
-    renderAdmin();
-  } else {
-    err.style.display='block';
-    document.getElementById('admin-pass').value='';
-  }
-}
-
-function goUser(){
-  show('user-view');
-  renderUser();
-}
-
-function showLogin(){
-  openAdminOverlay();
-}
-
-function doLogout(){
-  show('user-view');
-  renderUser();
-}
-
-function show(view){
-  ['login-view','user-view','admin-view'].forEach(v=>{
-    document.getElementById(v).style.display = v===view ? (v==='login-view'?'flex':'block') : 'none';
+function show(v){
+  ['user-view','admin-view'].forEach(id=>{
+    document.getElementById(id).style.display=id===v?'block':'none';
   });
 }
 
-// ========== USER VIEW ==========
+// USER VIEW
 function renderUser(){
-  let grid = document.getElementById('user-grid');
+  let g=document.getElementById('user-grid');
   if(!items.length){
-    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">👓</div><p>Abhi koi product nahi hai. Admin se contact karein.</p></div>`;
+    g.innerHTML='<div class="empty-state"><div class="empty-icon">👓</div><p>Abhi koi product nahi hai.</p></div>';
     return;
   }
-  grid.innerHTML = items.map((item,i)=>`
+  g.innerHTML=items.map((it,i)=>`
     <div class="card" onclick="openModal(${i})">
-      <img src="${item.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
-      <div class="card-cat">${item.category==='frame'?'Optical Frame':'Goggle'}</div>
-      <h3>${item.name}</h3>
-      <div class="price">₹${item.price}</div>
-    </div>
-  `).join('');
+      <img src="${it.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
+      <div class="card-cat">${it.category==='frame'?'Optical Frame':'Goggle'}</div>
+      <h3>${it.name}</h3>
+      <div class="price">₹${it.price}</div>
+    </div>`).join('');
 }
 
 function openModal(i){
-  let item = items[i];
-  let m = document.getElementById('prod-modal');
-  let c = document.getElementById('modal-content');
-  c.innerHTML = `
-    <img class="modal-img" src="${item.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
+  let it=items[i];
+  document.getElementById('modal-content').innerHTML=`
+    <img class="modal-img" src="${it.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
     <div class="modal-body">
-      <div class="modal-cat">${item.category==='frame'?'Optical Frame':'Goggle'}</div>
-      <h2>${item.name}</h2>
-      <p>${item.desc||'Premium quality eyewear.'}</p>
-      <div class="modal-price">₹${item.price}</div>
-      <div class="modal-actions">
-        <button class="btn-close" onclick="closeModal()">Close</button>
-      </div>
-    </div>
-  `;
-  m.classList.add('active');
+      <div class="modal-cat">${it.category==='frame'?'Optical Frame':'Goggle'}</div>
+      <h2>${it.name}</h2>
+      <p>${it.desc||'Premium quality eyewear.'}</p>
+      <div class="modal-price">₹${it.price}</div>
+      <div class="modal-actions"><button class="btn-close" onclick="closeModal()">Close</button></div>
+    </div>`;
+  document.getElementById('prod-modal').classList.add('active');
 }
 
-function closeModal(){
-  document.getElementById('prod-modal').classList.remove('active');
-}
+function closeModal(){ document.getElementById('prod-modal').classList.remove('active'); }
 
-function scrollTo(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
+function scrollToSec(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-// ========== ADMIN VIEW ==========
+// ADMIN VIEW
 function renderAdmin(){
-  let grid = document.getElementById('admin-grid');
-  document.getElementById('prod-count').textContent = items.length + ' product' + (items.length!==1?'s':'');
+  let g=document.getElementById('admin-grid');
+  document.getElementById('prod-count').textContent=items.length+' product'+(items.length!==1?'s':'');
   if(!items.length){
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--muted)"><div style="font-size:40px;margin-bottom:15px">📦</div><p>Koi product nahi. Left panel se add karein!</p></div>`;
+    g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:60px;color:#64748b"><div style="font-size:40px;margin-bottom:15px">📦</div><p>Koi product nahi. Left panel se add karein!</p></div>';
     return;
   }
-  grid.innerHTML = items.map((item,i)=>`
+  g.innerHTML=items.map((it,i)=>`
     <div class="admin-card">
-      <img src="${item.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
+      <img src="${it.image||'https://cdn-icons-png.flaticon.com/512/2976/2976215.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2976/2976215.png'">
       <div class="admin-card-body">
-        <div class="admin-card-cat">${item.category==='frame'?'Optical Frame':'Goggle'}</div>
-        <h3>${item.name}</h3>
-        <div class="admin-card-price">₹${item.price}</div>
+        <div class="admin-card-cat">${it.category==='frame'?'Optical Frame':'Goggle'}</div>
+        <h3>${it.name}</h3>
+        <div class="admin-card-price">₹${it.price}</div>
         <div class="admin-card-btns">
           <button class="edit-btn" onclick="startEdit(${i})">✎ Edit</button>
           <button class="del-btn" onclick="askDelete(${i})">✕ Delete</button>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function saveProduct(){
-  let idx = parseInt(document.getElementById('edit-index').value);
-  let name  = document.getElementById('a-name').value.trim();
-  let price = document.getElementById('a-price').value.trim();
-  let image = document.getElementById('a-image').value.trim();
-  let desc  = document.getElementById('a-desc').value.trim();
-  let cat   = document.getElementById('a-cat').value;
-
+  let idx=parseInt(document.getElementById('edit-index').value);
+  let name=document.getElementById('a-name').value.trim();
+  let price=document.getElementById('a-price').value.trim();
+  let image=document.getElementById('a-image').value.trim();
+  let desc=document.getElementById('a-desc').value.trim();
+  let cat=document.getElementById('a-cat').value;
   if(!name||!price){ showToast('⚠ Name aur price required hai!'); return; }
-
-  let obj = {category:cat, name, price, image, desc};
-
-  if(idx >= 0){
-    items[idx] = obj;
-    showToast('✓ Product update ho gaya!');
-    cancelEdit();
-  } else {
-    items.push(obj);
-    showToast('✓ Product add ho gaya!');
-    clearForm();
-  }
-
-  localStorage.setItem('opticalItems', JSON.stringify(items));
+  let obj={category:cat,name,price,image,desc};
+  if(idx>=0){ items[idx]=obj; showToast('✓ Product update ho gaya!'); cancelEdit(); }
+  else{ items.push(obj); showToast('✓ Product add ho gaya!'); clearForm(); }
+  localStorage.setItem('opticalItems',JSON.stringify(items));
   renderAdmin();
 }
 
 function startEdit(i){
-  let item = items[i];
-  document.getElementById('a-cat').value   = item.category;
-  document.getElementById('a-name').value  = item.name;
-  document.getElementById('a-price').value = item.price;
-  document.getElementById('a-image').value = item.image||'';
-  document.getElementById('a-desc').value  = item.desc||'';
-  document.getElementById('edit-index').value = i;
-  document.getElementById('form-title').textContent = 'Edit Product';
-  document.getElementById('save-btn').textContent   = '✓ Save Changes';
+  let it=items[i];
+  document.getElementById('a-cat').value=it.category;
+  document.getElementById('a-name').value=it.name;
+  document.getElementById('a-price').value=it.price;
+  document.getElementById('a-image').value=it.image||'';
+  document.getElementById('a-desc').value=it.desc||'';
+  document.getElementById('edit-index').value=i;
+  document.getElementById('form-title').textContent='Edit Product';
+  document.getElementById('save-btn').textContent='✓ Save Changes';
   document.getElementById('save-btn').classList.add('editing');
   document.getElementById('cancel-edit').classList.add('visible');
   document.querySelector('.admin-sidebar').scrollIntoView({behavior:'smooth'});
@@ -1203,94 +828,81 @@ function startEdit(i){
 
 function cancelEdit(){
   clearForm();
-  document.getElementById('edit-index').value = -1;
-  document.getElementById('form-title').textContent = 'Add New Product';
-  document.getElementById('save-btn').textContent   = '+ Add Product';
+  document.getElementById('edit-index').value=-1;
+  document.getElementById('form-title').textContent='Add New Product';
+  document.getElementById('save-btn').textContent='+ Add Product';
   document.getElementById('save-btn').classList.remove('editing');
   document.getElementById('cancel-edit').classList.remove('visible');
 }
 
 function clearForm(){
   ['a-name','a-price','a-image','a-desc'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('a-cat').value = 'frame';
+  document.getElementById('a-cat').value='frame';
 }
 
-function askDelete(i){
-  deleteIndex = i;
-  document.getElementById('confirm-modal').classList.add('active');
-}
-
-function closeConfirm(){
-  deleteIndex = -1;
-  document.getElementById('confirm-modal').classList.remove('active');
-}
-
+function askDelete(i){ deleteIndex=i; document.getElementById('confirm-modal').classList.add('active'); }
+function closeConfirm(){ deleteIndex=-1; document.getElementById('confirm-modal').classList.remove('active'); }
 function confirmDelete(){
-  if(deleteIndex >= 0){
-    items.splice(deleteIndex, 1);
-    localStorage.setItem('opticalItems', JSON.stringify(items));
+  if(deleteIndex>=0){
+    items.splice(deleteIndex,1);
+    localStorage.setItem('opticalItems',JSON.stringify(items));
     renderAdmin();
     showToast('🗑 Product delete ho gaya!');
   }
   closeConfirm();
 }
 
-// ========== TOAST ==========
+function doLogout(){ show('user-view'); renderUser(); }
+
+// TOAST
 let toastTimer;
 function showToast(msg){
-  let t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  let t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ========== CHANGE CREDENTIALS ==========
+// CHANGE CREDENTIALS
 function toggleCredsForm(){
-  let f = document.getElementById('creds-form');
-  let a = document.getElementById('creds-arrow');
-  let open = f.style.display==='block';
-  f.style.display = open ? 'none' : 'block';
-  a.textContent = open ? '▼' : '▲';
+  let f=document.getElementById('creds-form');
+  let a=document.getElementById('creds-arrow');
+  let open=f.style.display==='block';
+  f.style.display=open?'none':'block';
+  a.textContent=open?'▼':'▲';
 }
 
 function changeCreds(){
-  let cur     = document.getElementById('c-cur').value;
-  let newUser = document.getElementById('c-user').value.trim();
-  let newPass = document.getElementById('c-new').value;
-  let confirm = document.getElementById('c-confirm').value;
-  let msg     = document.getElementById('creds-msg');
+  let cur=document.getElementById('c-cur').value;
+  let newUser=document.getElementById('c-user').value.trim();
+  let newPass=document.getElementById('c-new').value;
+  let conf=document.getElementById('c-confirm').value;
+  let msg=document.getElementById('creds-msg');
 
-  function showMsg(text, ok){
-    msg.textContent = text;
-    msg.style.color = ok ? '#16a34a' : '#ef4444';
-    msg.style.display = 'block';
-    if(ok) setTimeout(()=>msg.style.display='none', 3000);
+  function showMsg(text,ok){
+    msg.textContent=text;
+    msg.style.color=ok?'#16a34a':'#ef4444';
+    msg.style.display='block';
+    if(ok)setTimeout(()=>msg.style.display='none',3000);
   }
 
-  if(!cur || !newUser || !newPass || !confirm){ showMsg('Saare fields bharo!', false); return; }
-  if(!checkCreds(document.getElementById('ov-user').value || newUser, cur)){
-    // current password verify using saved hash
-    if(hashStr(cur) !== getSavedPass()){ showMsg('Current password galat hai!', false); return; }
-  }
-  if(hashStr(cur) !== getSavedPass()){ showMsg('Current password galat hai!', false); return; }
-  if(newPass !== confirm){ showMsg('Naya password match nahi kiya!', false); return; }
-  if(newUser.length < 4){ showMsg('Username kam se kam 4 characters ka hona chahiye!', false); return; }
-  if(newPass.length < 6){ showMsg('Password kam se kam 6 characters ka hona chahiye!', false); return; }
-
-  saveCreds(newUser, newPass);
+  if(!cur||!newUser||!newPass||!conf){ showMsg('Saare fields bharo!',false); return; }
+  if(hashStr(cur)!==getSP()){ showMsg('Current password galat hai!',false); return; }
+  if(newPass!==conf){ showMsg('Naya password match nahi kiya!',false); return; }
+  if(newUser.length<4){ showMsg('Username minimum 4 characters ka hona chahiye!',false); return; }
+  if(newPass.length<6){ showMsg('Password minimum 6 characters ka hona chahiye!',false); return; }
+  saveCreds(newUser,newPass);
   ['c-cur','c-user','c-new','c-confirm'].forEach(id=>document.getElementById(id).value='');
-  showMsg('✓ Credentials successfully update ho gaye!', true);
+  showMsg('✓ Credentials update ho gaye!',true);
   showToast('🔐 Login details update ho gayi!');
 }
 
-// ========== HIDDEN ADMIN OVERLAY ==========
+// HIDDEN ADMIN OVERLAY
 function openAdminOverlay(){
   document.getElementById('ov-user').value='';
   document.getElementById('ov-pass').value='';
   document.getElementById('ov-err').style.display='none';
-  let ov = document.getElementById('admin-overlay');
-  ov.style.display='flex';
+  document.getElementById('admin-overlay').style.display='flex';
   setTimeout(()=>document.getElementById('ov-user').focus(),100);
 }
 
@@ -1299,14 +911,14 @@ function closeAdminOverlay(){
 }
 
 function toggleOvPw(){
-  let p = document.getElementById('ov-pass');
-  p.type = p.type==='password' ? 'text' : 'password';
+  let p=document.getElementById('ov-pass');
+  p.type=p.type==='password'?'text':'password';
 }
 
 function doOverlayLogin(){
-  let u = document.getElementById('ov-user').value.trim();
-  let p = document.getElementById('ov-pass').value;
-  let err = document.getElementById('ov-err');
+  let u=document.getElementById('ov-user').value.trim();
+  let p=document.getElementById('ov-pass').value;
+  let err=document.getElementById('ov-err');
   if(checkCreds(u,p)){
     err.style.display='none';
     closeAdminOverlay();
@@ -1318,17 +930,18 @@ function doOverlayLogin(){
   }
 }
 
-// Ctrl+Shift+A = secret admin shortcut
-document.addEventListener('keydown', function(e){
-  if(e.ctrlKey && e.shiftKey && e.key==='A'){
+// Ctrl+Shift+A = Secret admin shortcut
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&e.shiftKey&&e.key==='A'){
     e.preventDefault();
-    let adminVisible = document.getElementById('admin-view').style.display!=='none';
-    if(!adminVisible) openAdminOverlay();
+    if(document.getElementById('admin-view').style.display==='none'||
+       document.getElementById('admin-view').style.display===''){
+      openAdminOverlay();
+    }
   }
 });
 
-// ========== INIT ==========
-// Website seedha user/shop view pe khulti hai
+// INIT — seedha shop view pe khulta hai
 show('user-view');
 renderUser();
 </script>
