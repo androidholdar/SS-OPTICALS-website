@@ -881,7 +881,6 @@ footer span{ color:rgba(255,255,255,0.6); }
       <li onclick="scrollTo('about')">About</li>
       <li onclick="scrollTo('shop')">Shop</li>
     </ul>
-    <span class="admin-badge" onclick="showLogin()">⚙ Admin</span>
   </nav>
 
   <!-- Hero -->
@@ -968,6 +967,34 @@ footer span{ color:rgba(255,255,255,0.6); }
       <input type="hidden" id="edit-index" value="-1">
       <button class="save-btn" id="save-btn" onclick="saveProduct()">+ Add Product</button>
       <button class="cancel-edit-btn" id="cancel-edit" onclick="cancelEdit()">✕ Cancel Edit</button>
+
+      <!-- Change Credentials -->
+      <div style="margin-top:30px;padding-top:25px;border-top:1px solid #e2e8f0;">
+        <div class="sidebar-title" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onclick="toggleCredsForm()">
+          <span>🔐 Change Login Details</span>
+          <span id="creds-arrow" style="font-size:12px;color:var(--muted);">▼</span>
+        </div>
+        <div id="creds-form" style="display:none;margin-top:15px;">
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <input class="form-input" type="password" id="c-cur" placeholder="Purana password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Username</label>
+            <input class="form-input" type="text" id="c-user" placeholder="Naya username">
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input class="form-input" type="password" id="c-new" placeholder="Naya password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <input class="form-input" type="password" id="c-confirm" placeholder="Password dobara likho">
+          </div>
+          <button class="save-btn" style="background:linear-gradient(135deg,#0f766e,#0284c7);" onclick="changeCreds()">✓ Save New Credentials</button>
+          <div id="creds-msg" style="font-size:13px;margin-top:10px;display:none;"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Product Grid -->
@@ -998,8 +1025,20 @@ footer span{ color:rgba(255,255,255,0.6); }
 
 <script>
 // ========== STATE ==========
-const ADMIN_USER = "ssopticals";
-const ADMIN_PASS = "admin@123";
+// Credentials localStorage mein hashed store hote hain, source code mein plain text nahi
+function hashStr(str){
+  let hash = 0;
+  for(let i=0;i<str.length;i++){ hash = ((hash<<5)-hash)+str.charCodeAt(i); hash|=0; }
+  return hash.toString(16);
+}
+
+const DEFAULT_USER_HASH = hashStr("ssopticals");
+const DEFAULT_PASS_HASH = hashStr("admin@123");
+
+function getSavedUser(){ return localStorage.getItem('_adm_u') || DEFAULT_USER_HASH; }
+function getSavedPass(){ return localStorage.getItem('_adm_p') || DEFAULT_PASS_HASH; }
+function checkCreds(u,p){ return hashStr(u)===getSavedUser() && hashStr(p)===getSavedPass(); }
+function saveCreds(u,p){ localStorage.setItem('_adm_u',hashStr(u)); localStorage.setItem('_adm_p',hashStr(p)); }
 
 let items = JSON.parse(localStorage.getItem("opticalItems")) || [];
 let deleteIndex = -1;
@@ -1023,7 +1062,7 @@ function doAdminLogin(){
   let u = document.getElementById('admin-user').value.trim();
   let p = document.getElementById('admin-pass').value;
   let err = document.getElementById('login-err');
-  if(u===ADMIN_USER && p===ADMIN_PASS){
+  if(checkCreds(u,p)){
     err.style.display='none';
     show('admin-view');
     renderAdmin();
@@ -1206,6 +1245,45 @@ function showToast(msg){
   toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
+// ========== CHANGE CREDENTIALS ==========
+function toggleCredsForm(){
+  let f = document.getElementById('creds-form');
+  let a = document.getElementById('creds-arrow');
+  let open = f.style.display==='block';
+  f.style.display = open ? 'none' : 'block';
+  a.textContent = open ? '▼' : '▲';
+}
+
+function changeCreds(){
+  let cur     = document.getElementById('c-cur').value;
+  let newUser = document.getElementById('c-user').value.trim();
+  let newPass = document.getElementById('c-new').value;
+  let confirm = document.getElementById('c-confirm').value;
+  let msg     = document.getElementById('creds-msg');
+
+  function showMsg(text, ok){
+    msg.textContent = text;
+    msg.style.color = ok ? '#16a34a' : '#ef4444';
+    msg.style.display = 'block';
+    if(ok) setTimeout(()=>msg.style.display='none', 3000);
+  }
+
+  if(!cur || !newUser || !newPass || !confirm){ showMsg('Saare fields bharo!', false); return; }
+  if(!checkCreds(document.getElementById('ov-user').value || newUser, cur)){
+    // current password verify using saved hash
+    if(hashStr(cur) !== getSavedPass()){ showMsg('Current password galat hai!', false); return; }
+  }
+  if(hashStr(cur) !== getSavedPass()){ showMsg('Current password galat hai!', false); return; }
+  if(newPass !== confirm){ showMsg('Naya password match nahi kiya!', false); return; }
+  if(newUser.length < 4){ showMsg('Username kam se kam 4 characters ka hona chahiye!', false); return; }
+  if(newPass.length < 6){ showMsg('Password kam se kam 6 characters ka hona chahiye!', false); return; }
+
+  saveCreds(newUser, newPass);
+  ['c-cur','c-user','c-new','c-confirm'].forEach(id=>document.getElementById(id).value='');
+  showMsg('✓ Credentials successfully update ho gaye!', true);
+  showToast('🔐 Login details update ho gayi!');
+}
+
 // ========== HIDDEN ADMIN OVERLAY ==========
 function openAdminOverlay(){
   document.getElementById('ov-user').value='';
@@ -1229,7 +1307,7 @@ function doOverlayLogin(){
   let u = document.getElementById('ov-user').value.trim();
   let p = document.getElementById('ov-pass').value;
   let err = document.getElementById('ov-err');
-  if(u===ADMIN_USER && p===ADMIN_PASS){
+  if(checkCreds(u,p)){
     err.style.display='none';
     closeAdminOverlay();
     show('admin-view');
